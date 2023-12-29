@@ -21,11 +21,10 @@ const row = (bill) => {
 
 const rows = (data) => {
     if (data && data.length) {
-        const sortedData = [...data].sort((a, b) => b.date.localeCompare(a.date));
-        return sortedData.map(bill => row(bill)).join("");
-    } else {
-        return "";
+        data.sort((a, b) => { return new Date(b.date) - new Date(a.date) });
+        return data.map(bill => row(bill)).join("");
     }
+    return "";
 }
 
 export default ({ data: bills, loading, error }) => {
